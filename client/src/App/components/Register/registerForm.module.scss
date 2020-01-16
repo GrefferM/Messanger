@@ -1,0 +1,18 @@
+.title {
+    font-size: 1.9rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.links {
+    display: flex;
+    justify-content: space-between;
+}
+
+.links a {
+    color: #6c757d;
+}
+
+.links a:hover {
+    color: #585e63;
+}
