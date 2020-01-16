@@ -4,13 +4,17 @@
 
 .nav_link {
     color: white;
-    text-decoration: none;
+    border-bottom: 1px solid transparent;
     font-size: .9rem;
+
+    display: block;
     padding: .1rem .3rem;
+    margin: 0 .3rem;
 
     &:hover {
         color: white;
-        text-decoration: underline;
+        text-decoration: none;
+        border-bottom: 1px solid white;
     }
 }
 
@@ -21,5 +25,14 @@
     &:hover {
         text-decoration: none;
         border-bottom: 1px solid white;
+    }
+}
+
+.logout {
+    @extend .nav_link;
+
+    &:hover {
+        text-decoration: none;
+        border-bottom: 1px dotted white;
     }
 }

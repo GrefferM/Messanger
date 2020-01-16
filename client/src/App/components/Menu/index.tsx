@@ -34,11 +34,6 @@ const Menu: React.FC<Props> = (props: Props) => {
 
     const { isAuth, jwt } = L.fromPairs(props.auth) as unknown as iAuth
 
-    function handlerLogout() {
-        sessionStorage.clear()
-        props.actionLogout(jwt)
-    }
-
     return (
         <Nav className={`navbar navbar-expand-lg ${classes.menu}`}>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,15 +60,15 @@ const Menu: React.FC<Props> = (props: Props) => {
                 <div>
                     <ul className="navbar-nav mr-auto">
                         {!isAuth && <li className={`nav-item d-flex align-items-center`}>
-                            <span className='text-light mr-2'>Здраствуйте,</span>
-                            <Link className={classes.login} to="/login"><FontAwesomeIcon icon={faUser}/> Войти в личний кабинет</Link>
+                            <span className='text-light'>Здраствуйте,</span>
+                            <Link className={classes.login} to="/login"><FontAwesomeIcon icon={faUser} /> Войти в личний кабинет</Link>
                         </li>}
                         {isAuth && <li className={`nav-item d-flex align-items-center`}>
-                            <span className='text-light mr-2'>Здраствуйте,</span>
-                            <Link className={classes.login} to="/privateOffice"><FontAwesomeIcon icon={faUser}/> Войти в личний кабинет</Link>
+                            <span className='text-light'>Здраствуйте,</span>
+                            <Link className={classes.login} to="/privateOffice"><FontAwesomeIcon icon={faUser} /> Войти в личний кабинет</Link>
                         </li>}
                         {isAuth && <li className={`nav-item`}>
-                            <Link className={classes.nav_link} to="/logout" onClick={handlerLogout}>Выйти</Link>
+                            <Link className={classes.logout} to="/logout" onClick={props.actionLogout.bind(event, jwt)}>Выйти</Link>
                         </li>}
                     </ul>
                 </div>

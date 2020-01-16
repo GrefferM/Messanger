@@ -1,6 +1,7 @@
 import React from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import PrivateRouter from '~component/PrivateRouter'
+import AdminRouter from '~component/AdminRouter'
 
 import Layout from '~container/Layout'
 import Login from '~component/Login'
@@ -13,7 +14,7 @@ export default (
         <Route path='/' component={Layout} exact />
         <Route path='/login'>
             <Layout>
-                <PrivateRouter autorization={false} redirect='/PrivateOffice'>
+                <PrivateRouter autorization={false} redirect='/privateOffice'>
                     <Login />
                 </PrivateRouter>
             </Layout>
@@ -35,11 +36,18 @@ export default (
                 </PrivateRouter>
             </Layout>
         </Route>
-        <Route path='/PrivateOffice'>
+        <Route path='/privateOffice'>
             <Layout>
                 <PrivateRouter autorization={true} redirect='/login'>
                     <PrivateOffice />
                 </PrivateRouter>
+            </Layout>
+        </Route>
+        <Route path='/admin'>
+            <Layout>
+                <AdminRouter redirect='/'>
+                    <PrivateOffice />
+                </AdminRouter>
             </Layout>
         </Route>
     </Switch>

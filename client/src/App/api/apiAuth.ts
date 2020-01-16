@@ -14,8 +14,9 @@ export const fetchLogin = async (value: iFormLoginProps): Promise<iAuth> => {
 
     const token = L.replace(L.toString(body), 'Bearer ', '')
     const verify = jwt.verify(token, keys.JWT) as unknown as iAuth
+
+    sessionStorage.setItem('lgn', token)
     return new Promise(resolve => {
-        sessionStorage.setItem('lgn', token)
         resolve(L.merge(verify, { jwt: body }))
     })
 }
@@ -23,7 +24,8 @@ export const fetchLogout = async (jsonwebtoken: string): Promise<iAuth> => {
     const { body } = await request
         .get('/api/auth/logout')
         .set({ Authorization: jsonwebtoken })
-
+        
+    sessionStorage.clear()
     return new Promise(resolve => {
         resolve(body)
     })
