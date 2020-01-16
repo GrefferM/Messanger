@@ -96,8 +96,8 @@ const registerForm: React.FC<Props> = (props: Props) => {
                         <Link to='/forgotPassword'>Забыл пароль</Link>
                         <Link to='/login'>Войти</Link>
                     </div>
-
-                    <button type="submit" className="btn btn-primary w-100" disabled={success && formikBag.isSubmitting}>Войти</button>
+                    
+                    <button type="submit" className="btn btn-primary w-100" disabled={success && formikBag.isSubmitting}>Зарегестрироваться</button>
                 </Form>)}>
             </Formik>
         </div>

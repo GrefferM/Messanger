@@ -11,6 +11,7 @@ const User = model('user')
 
 interface iUser {
     id: string
+    isAdmin: boolean
     name: string
     email: string
     password: string
@@ -30,12 +31,14 @@ export class Auth implements iAuth, iUser {
     public name: string = ''
     public email: string = ''
     public password: string = ''
+    public isAdmin: boolean = false
 
     candidate(params: iUser) {
         this.id = params.id
         this.name = params.name
         this.email = params.email
         this.password = params.password
+        this.isAdmin = params.isAdmin
     }
 }
 
@@ -58,7 +61,7 @@ export const login = async (req: Request, res: Response) => {
             req.session.isAuthenticated = true
             // @ts-ignore
             req.session.user = candidate
-
+            
             res.status(200).json(`Bearer ${token}`)
         } else {
             res.status(401).json(new Auth(false, false, "Not a correct password or login entry try again"))
@@ -94,7 +97,8 @@ export const register = async (req: Request, res: Response) => {
             const user = new User({
                 name: req.body.name,
                 email: req.body.email,
-                password: await bcrypt.hash(password, salt)
+                password: await bcrypt.hash(password, salt),
+                isAdmin: false
             })
             user.save()
 

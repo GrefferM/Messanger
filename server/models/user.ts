@@ -6,6 +6,10 @@ const userSchema = new Schema({
         maxlength: 255,
         minlength: 3
     },
+    isAdmin: {
+        type: Boolean,
+        required: true
+    },
     password: {
         type: String,
         maxlength: 255,

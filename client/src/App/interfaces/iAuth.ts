@@ -6,6 +6,7 @@ export interface iAuth {
 }
 export interface iUser {
     id: string
+    isAdmin: boolean
     name: string
     email: string
     password: string
