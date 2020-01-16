@@ -5,9 +5,12 @@ import { Link } from 'react-router-dom'
 import L from 'lodash'
 
 import iRootState from '~interface/iRootState'
-import { iAuth, iUser } from '~interface/iAuth'
+import { iAuth } from '~interface/iAuth'
 import { actionLogout } from '~action/actionsAuth'
 import { getAuth } from '~selectors'
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUser } from '@fortawesome/free-solid-svg-icons'
 
 import classes from './index.module.scss'
 
@@ -63,10 +66,14 @@ const Menu: React.FC<Props> = (props: Props) => {
                     <ul className="navbar-nav mr-auto">
                         {!isAuth && <li className={`nav-item d-flex align-items-center`}>
                             <span className='text-light mr-2'>Здраствуйте,</span>
-                            <Link className={classes.login} to="/login">Войти в личний кабинет</Link>
+                            <Link className={classes.login} to="/login"><FontAwesomeIcon icon={faUser}/> Войти в личний кабинет</Link>
+                        </li>}
+                        {isAuth && <li className={`nav-item d-flex align-items-center`}>
+                            <span className='text-light mr-2'>Здраствуйте,</span>
+                            <Link className={classes.login} to="/privateOffice"><FontAwesomeIcon icon={faUser}/> Войти в личний кабинет</Link>
                         </li>}
                         {isAuth && <li className={`nav-item`}>
-                            <Link className={classes.nav_link} to="/logout" onClick={handlerLogout}>Logout</Link>
+                            <Link className={classes.nav_link} to="/logout" onClick={handlerLogout}>Выйти</Link>
                         </li>}
                     </ul>
                 </div>

@@ -6,13 +6,14 @@ import Layout from '~container/Layout'
 import Login from '~component/Login'
 import Register from '~component/Register'
 import ForgotPassword from '~component/ForgotPassword'
+import PrivateOffice from '~component/PrivateOffice'
 
 export default (
     <Switch>
         <Route path='/' component={Layout} exact />
         <Route path='/login'>
             <Layout>
-                <PrivateRouter autorization={false} redirect='/'>
+                <PrivateRouter autorization={false} redirect='/PrivateOffice'>
                     <Login />
                 </PrivateRouter>
             </Layout>
@@ -31,6 +32,13 @@ export default (
             <Layout>
                 <PrivateRouter autorization={false} redirect='/'>
                     <ForgotPassword />
+                </PrivateRouter>
+            </Layout>
+        </Route>
+        <Route path='/PrivateOffice'>
+            <Layout>
+                <PrivateRouter autorization={true} redirect='/login'>
+                    <PrivateOffice />
                 </PrivateRouter>
             </Layout>
         </Route>
