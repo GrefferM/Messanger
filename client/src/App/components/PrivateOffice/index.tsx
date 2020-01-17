@@ -76,7 +76,7 @@ const PrivateOffice: React.FC<Props> = (props: Props) => {
     }
 
     return (
-        <Row className={'mx-0 h-100'}>
+        <Row className={'mx-0 vh-100'}>
             <Col sm={3} className={classes.menu}>
                 <Nav className="flex-column">
                     {menu.map((value, key) => renderNavItem(value, key))}
