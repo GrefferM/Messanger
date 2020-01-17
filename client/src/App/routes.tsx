@@ -43,7 +43,49 @@ export default (
                 </PrivateRouter>
             </Layout>
         </Route>
-        <Route path='/admin'>
+        <Route path='/privateOffice/profile'>
+            <Layout>
+                <PrivateRouter autorization={true} redirect='/login'>
+                    <PrivateOffice />
+                </PrivateRouter>
+            </Layout>
+        </Route>
+        <Route path='/privateOffice/message'>
+            <Layout>
+                <PrivateRouter autorization={true} redirect='/login'>
+                    <PrivateOffice />
+                </PrivateRouter>
+            </Layout>
+        </Route>
+        <Route path='/privateOffice/groups'>
+            <Layout>
+                <PrivateRouter autorization={true} redirect='/login'>
+                    <PrivateOffice />
+                </PrivateRouter>
+            </Layout>
+        </Route>
+        <Route path='/privateOffice/buy'>
+            <Layout>
+                <PrivateRouter autorization={true} redirect='/login'>
+                    <PrivateOffice />
+                </PrivateRouter>
+            </Layout>
+        </Route>
+        <Route path='/privateOffice/settings'>
+            <Layout>
+                <PrivateRouter autorization={true} redirect='/login'>
+                    <PrivateOffice />
+                </PrivateRouter>
+            </Layout>
+        </Route>
+        <Route path='/privateOffice/info'>
+            <Layout>
+                <PrivateRouter autorization={true} redirect='/login'>
+                    <PrivateOffice />
+                </PrivateRouter>
+            </Layout>
+        </Route>
+        <Route path='/privateOffice/admin'>
             <Layout>
                 <AdminRouter redirect='/'>
                     <PrivateOffice />

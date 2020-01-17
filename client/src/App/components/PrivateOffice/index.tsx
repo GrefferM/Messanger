@@ -1,38 +1,91 @@
 import React from 'react'
-import { Container, Row, Col, Nav } from 'react-bootstrap'
+import { Row, Col, Nav } from 'react-bootstrap'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser } from '@fortawesome/free-solid-svg-icons'
+import {
+    faUser,
+    faEnvelope,
+    faUsers,
+    faMoneyBillWave,
+    faCogs,
+    faInfoCircle,
+    faUserShield
+} from '@fortawesome/free-solid-svg-icons'
+import { IconDefinition } from '@fortawesome/fontawesome-common-types'
 import classes from './index.module.scss'
 
-const PrivateOffice: React.FC = () => {
+interface Menu {
+    value: string
+    icon: IconDefinition
+    to: string
+}
 
-    const menu: string[] = ['Ваш профиль', 'Ваши покупки', 'Настройки', 'Помощь', 'Панель администратора']
+interface Props {
+    children?: React.ReactNode
+}
 
-    function renderNavItem(value: string, key:number) {
+const PrivateOffice: React.FC<Props> = (props: Props) => {
+
+    const menu: Menu[] = [
+        {
+            value: 'Ваш профиль',
+            icon: faUser,
+            to: 'profile'
+        },
+        {
+            value: 'Сообщения',
+            icon: faEnvelope,
+            to: 'message'
+        },
+        {
+            value: 'Группы',
+            icon: faUsers,
+            to: 'groups'
+        },
+        {
+            value: 'Покупки',
+            icon: faMoneyBillWave,
+            to: 'buy'
+        },
+        {
+            value: 'Настройки',
+            icon: faCogs,
+            to: 'settings'
+        },
+        {
+            value: 'Помощь',
+            icon: faInfoCircle,
+            to: 'info'
+        },
+        {
+            value: 'Панель администратора',
+            icon: faUserShield,
+            to: 'admin'
+        }
+    ]
+
+    function renderNavItem(menu: Menu, key: number) {
         return (
             <Nav.Item key={key} className={classes.nav_item}>
-                <Nav.Link className={classes.nav_link}>
-                    <FontAwesomeIcon icon={faUser} className='mr-2' />
-                    {value}
+                <Nav.Link className={classes.nav_link} href={`/privateOffice/${menu.to}`}>
+                    <FontAwesomeIcon icon={menu.icon} className={classes.icon} />
+                    <div className={classes.value}>{menu.value}</div>
                 </Nav.Link>
             </Nav.Item>
         )
     }
 
     return (
-        <Container fluid={true}>
-            <Row>
-                <Col md={3} className={`p-0 ${classes.menu}`}>
-                    <Nav className="flex-column">
-                        {menu.map((value, key) => renderNavItem(value, key))}
-                    </Nav>
-                </Col>
-                <Col>
-
-                </Col>
-            </Row>
-        </Container>
+        <Row className={'mx-0 h-100'}>
+            <Col sm={3} className={classes.menu}>
+                <Nav className="flex-column">
+                    {menu.map((value, key) => renderNavItem(value, key))}
+                </Nav>
+            </Col>
+            <Col>
+                {props.children}
+            </Col>
+        </Row>
     )
 }
 
