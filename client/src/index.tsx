@@ -11,7 +11,7 @@ import createRootReducer from '~reducers/index'
 import routes from '~routes'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
-import './index.css'
+import './index.scss'
 
 const history = createBrowserHistory()
 const middlewares = [thunk, routerMiddleware(history)]

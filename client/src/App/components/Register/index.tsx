@@ -5,7 +5,7 @@ import classes from './index.module.scss'
 
 const Register: React.FC = () => {
     return (
-        <div className={classes.register}>
+        <div className={`my-2 ${classes.register}`}>
             <Form />
         </div>
     )

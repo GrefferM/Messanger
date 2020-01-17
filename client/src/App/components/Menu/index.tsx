@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { connect, ConnectedProps } from 'react-redux'
 import { Nav } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
@@ -33,45 +33,64 @@ type Props = PropsFromRedux
 const Menu: React.FC<Props> = (props: Props) => {
 
     const { isAuth, jwt } = L.fromPairs(props.auth) as unknown as iAuth
+    const [toggler, setToggler] = useState(classes.toggler_icon)
+
+    function handlerIsClose() {
+        if (L.split(toggler, ' ').length === 1) {
+            setToggler(`${classes.toggler_icon} ${classes.active}`)
+        } else {
+            setToggler(classes.toggler_icon)
+        }
+    }
 
     return (
         <Nav className={`navbar navbar-expand-lg ${classes.menu}`}>
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span>
+            <button className={`d-block d-lg-none ${classes.toggler_button}`}
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+                onClick={handlerIsClose}
+            >
+                <span className={toggler}></span>
             </button>
 
             <div className="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
-                <div>
-                    <ul className="navbar-nav mr-auto">
-                        <li className={`nav-item active`}>
-                            <Link className={classes.nav_link} to="/">Home</Link>
-                        </li>
-                        <li className={`nav-item active`}>
-                            <Link className={classes.nav_link} to="/">Контакты</Link>
-                        </li>
-                        <li className={`nav-item active`}>
-                            <Link className={classes.nav_link} to="/">Информация о компании</Link>
-                        </li>
-                        <li className={`nav-item active`}>
-                            <Link className={classes.nav_link} to="/">Сервисы</Link>
-                        </li>
-                    </ul>
-                </div>
-                <div>
-                    <ul className="navbar-nav mr-auto">
-                        {!isAuth && <li className={`nav-item d-flex align-items-center`}>
-                            <span className='text-light'>Здраствуйте,</span>
-                            <Link className={classes.login} to="/login"><FontAwesomeIcon icon={faUser} /> Войти в личний кабинет</Link>
-                        </li>}
-                        {isAuth && <li className={`nav-item d-flex align-items-center`}>
-                            <span className='text-light'>Здраствуйте,</span>
-                            <Link className={classes.login} to="/privateOffice"><FontAwesomeIcon icon={faUser} /> Войти в личний кабинет</Link>
-                        </li>}
-                        {isAuth && <li className={`nav-item`}>
-                            <Link className={classes.logout} to="/logout" onClick={props.actionLogout.bind(event, jwt)}>Выйти</Link>
-                        </li>}
-                    </ul>
-                </div>
+                <ul className="navbar-nav">
+                    <li className={`nav-item active`}>
+                        <Link className={classes.nav_link} to="/">Home</Link>
+                    </li>
+                    <li className={`nav-item`}>
+                        <Link className={classes.nav_link} to="/">Контакты</Link>
+                    </li>
+                    <li className={`nav-item`}>
+                        <Link className={classes.nav_link} to="/">Информация о компании</Link>
+                    </li>
+                    <li className={`nav-item`}>
+                        <Link className={classes.nav_link} to="/">Сервисы</Link>
+                    </li>
+                </ul>
+                <ul className="navbar-nav">
+                    {!isAuth && <li className={`nav-item d-flex align-items-center`}>
+                        <span className='text-light d-none d-lg-block'>Здраствуйте,</span>
+                        <Link className={classes.login} to="/login">
+                            <FontAwesomeIcon icon={faUser} />
+                            Войти в личний кабинет
+                        </Link>
+                    </li>}
+                    {isAuth && <li className={`nav-item d-flex align-items-center`}>
+                        <span className='text-light d-none d-lg-block'>Здраствуйте,</span>
+                        <Link className={classes.login} to="/privateOffice">
+                            <FontAwesomeIcon icon={faUser} />
+                            Войти в личний кабинет
+                        </Link>
+                    </li>}
+                    {isAuth && <li className={`nav-item`}>
+                        <Link className={classes.logout} to="/logout" onClick={props.actionLogout.bind(event, jwt)}>Выйти</Link>
+                    </li>}
+                </ul>
             </div>
         </Nav>
     )

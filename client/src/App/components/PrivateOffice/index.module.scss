@@ -1,0 +1,24 @@
+.menu {
+    background-color: #0e1d2b;
+}
+
+.nav_item {
+    border-bottom: 1px solid #344453;
+
+    &:hover {
+        background-color: #122538;
+    }
+    
+    &:last-child {
+        border-bottom: 1px solid transparent;
+    }
+}
+
+.nav_link {
+    color: white;
+    transition: all .2s ease-in-out;
+
+    &:hover {
+        color: #dcdcdc;
+    }
+}

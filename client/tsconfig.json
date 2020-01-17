@@ -29,6 +29,7 @@
             "~api/*": ["App/api/*"],
             "~interface/*": ["App/interfaces/*"],
             "~config/*": ["../config/*"],
+            "~bootstrap/*": ["../node_modules/bootstrap/*"],
             "~routes": ["App/routes.tsx"],
             "~selectors": ["App/selectors.ts"]
         },

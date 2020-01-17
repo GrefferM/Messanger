@@ -4,7 +4,8 @@ const userSchema = new Schema({
     name: {
         type: String,
         maxlength: 255,
-        minlength: 3
+        minlength: 3,
+        required: true
     },
     isAdmin: {
         type: Boolean,

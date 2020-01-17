@@ -22,7 +22,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "802206413f207793426e";
+/******/ 	var hotCurrentHash = "656ffb702f7fb6b7efa3";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -811,7 +811,7 @@ eval("\r\nvar __awaiter = (this && this.__awaiter) || function (thisArg, _argume
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nvar mongoose_1 = __webpack_require__(/*! mongoose */ \"mongoose\");\r\nvar userSchema = new mongoose_1.Schema({\r\n    name: {\r\n        type: String,\r\n        maxlength: 255,\r\n        minlength: 3\r\n    },\r\n    isAdmin: {\r\n        type: Boolean,\r\n        required: true\r\n    },\r\n    password: {\r\n        type: String,\r\n        maxlength: 255,\r\n        minlength: 3,\r\n        required: true\r\n    },\r\n    email: {\r\n        type: String,\r\n        maxlength: 255,\r\n        minlength: 3,\r\n        required: true\r\n    }\r\n});\r\nmongoose_1.model('user', userSchema);\r\n\n\n//# sourceURL=webpack:///./models/user.ts?");
+eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nvar mongoose_1 = __webpack_require__(/*! mongoose */ \"mongoose\");\r\nvar userSchema = new mongoose_1.Schema({\r\n    name: {\r\n        type: String,\r\n        maxlength: 255,\r\n        minlength: 3,\r\n        required: true\r\n    },\r\n    isAdmin: {\r\n        type: Boolean,\r\n        required: true\r\n    },\r\n    password: {\r\n        type: String,\r\n        maxlength: 255,\r\n        minlength: 3,\r\n        required: true\r\n    },\r\n    email: {\r\n        type: String,\r\n        maxlength: 255,\r\n        minlength: 3,\r\n        required: true\r\n    }\r\n});\r\nmongoose_1.model('user', userSchema);\r\n\n\n//# sourceURL=webpack:///./models/user.ts?");
 
 /***/ }),
 

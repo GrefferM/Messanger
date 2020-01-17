@@ -1,3 +1,7 @@
+@import "~bootstrap/scss/_functions.scss";
+@import "~bootstrap/scss/_variables.scss";
+@import "~bootstrap/scss/mixins/_breakpoints.scss";
+
 .menu {
     background-color: #122538;
 }
@@ -15,6 +19,12 @@
         color: white;
         text-decoration: none;
         border-bottom: 1px solid white;
+    }
+
+    @include media-breakpoint-down(lg) {
+        &:hover {
+            border-bottom: 1px solid transparent;
+        }
     }
 }
 
@@ -34,5 +44,61 @@
     &:hover {
         text-decoration: none;
         border-bottom: 1px dotted white;
+    }
+}
+
+.toggler_button {
+    padding: 0;
+
+    height: 1.2rem;
+    width: 1.6rem;
+
+    position: relative;
+
+    border-color: transparent;
+    background-color: transparent;
+}
+
+.active {
+    background-color: transparent!important;
+
+    &::after {
+        top: 50%!important;
+        transform: rotate(-45deg);
+    }
+
+    &::before {
+        top: 50%!important;
+        transform: rotate(45deg);
+    }
+}
+
+@mixin TogglerIcon {
+    height: 2px;
+    width: 100%;
+    display: block;
+
+    background-color: #fff;
+
+    transition: all .3s ease-in-out;
+}
+
+.toggler_icon {
+    @include TogglerIcon;
+
+    &::after {
+        @include TogglerIcon;
+
+        content: '';
+        position: absolute;
+        top: 0;
+    }
+
+    &::before {
+        @include TogglerIcon;
+
+        content: '';
+        position: absolute;
+        bottom: 0;
     }
 }
