@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import L from 'lodash'
 
 import iRootState from '~interface/iRootState'
-import { iAuth } from '~interface/iAuth'
+import { iAuth, iUser } from '~interface/iAuth'
 import { actionLogout } from '~action/actionsAuth'
 import { getAuth } from '~selectors'
 
@@ -32,7 +32,7 @@ type Props = PropsFromRedux
 
 const Menu: React.FC<Props> = (props: Props) => {
 
-    const { isAuth, jwt } = L.fromPairs(props.auth) as unknown as iAuth
+    const { isAuth, name, jwt } = L.fromPairs(props.auth) as unknown as iAuth & iUser
     const [toggler, setToggler] = useState(classes.toggler_icon)
 
     function handlerIsClose() {
@@ -74,17 +74,20 @@ const Menu: React.FC<Props> = (props: Props) => {
                 </ul>
                 <ul className="navbar-nav">
                     {!isAuth && <li className={`nav-item d-flex align-items-center`}>
-                        <span className='text-light d-none d-lg-block'>Здраствуйте,</span>
                         <Link className={classes.login} to="/login">
-                            <FontAwesomeIcon icon={faUser} />
-                            Войти в личний кабинет
+                            Войти
+                        </Link>
+                    </li>}
+                    {!isAuth && <li className={`nav-item d-flex align-items-center`}>
+                        <Link className={classes.login} to="/register">
+                            Зарегестрироваться
                         </Link>
                     </li>}
                     {isAuth && <li className={`nav-item d-flex align-items-center`}>
-                        <span className='text-light d-none d-lg-block'>Здраствуйте,</span>
+                        <span className='text-light d-none d-lg-block'>Здраствуйте, {name} </span>
                         <Link className={classes.login} to="/privateOffice">
-                            <FontAwesomeIcon icon={faUser} />
-                            Войти в личний кабинет
+                            <FontAwesomeIcon icon={faUser} className={'mx-1'} />
+                            Личний кабинет
                         </Link>
                     </li>}
                     {isAuth && <li className={`nav-item`}>

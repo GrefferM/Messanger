@@ -7,10 +7,13 @@ const Layout: React.FC = (props) => {
     return (
         <Container
             fluid={true}
-            className={'p-0'}
+            className={'p-0 vh-100 d-flex flex-column justify-content-between'}
         >
             <Menu />
-            {props.children}
+            <div className={'h-100'}>
+                {props.children}
+            </div>
+            <Menu />
         </Container>
     )
 }
