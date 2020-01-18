@@ -14,9 +14,9 @@ import {
     ACTION_REGISTER_FAILURE
 } from '~actionType/auth'
 import {
-    fetchLogin as fetchLoginApi,
-    fetchRegister as fetchRegisterApi,
-    fetchLogout as fetchLogoutApi
+    apiLogin as apiLoginApi,
+    apiRegister as apiRegisterApi,
+    apiLogout as apiLogoutApi
 } from '~api/apiAuth'
 import { iFormLoginProps } from '~component/Auth/Login/loginForm'
 import { iFormRegisterProps } from '~component/Auth/Register/registerForm'
@@ -25,7 +25,7 @@ export const actionLogin = (value: iFormLoginProps) => async (dispatch: Dispatch
     dispatch({ type: ACTION_LOGIN_START })
 
     try {
-        const data = await fetchLoginApi(value)
+        const data = await apiLoginApi(value)
         dispatch({
             type: ACTION_LOGIN_SUCCESS,
             payload: data
@@ -38,11 +38,11 @@ export const actionLogin = (value: iFormLoginProps) => async (dispatch: Dispatch
         })
     }
 }
-export const actionLogout = (jsonwebtoken:string) => async (dispatch: Dispatch) => {
+export const actionLogout = () => async (dispatch: Dispatch) => {
     dispatch({ type: ACTION_LOGOUT_START })
 
     try {
-        const data = await fetchLogoutApi(jsonwebtoken)
+        const data = await apiLogoutApi()
         dispatch({
             type: ACTION_LOGOUT_SUCCESS,
             payload: data
@@ -59,7 +59,7 @@ export const actionRegister = (value: iFormRegisterProps) => async (dispatch: Di
     dispatch({ type: ACTION_REGISTER_START })
 
     try {
-        const data = await fetchRegisterApi(value)
+        const data = await apiRegisterApi(value)
         dispatch({
             type: ACTION_REGISTER_SUCCESS,
             payload: data

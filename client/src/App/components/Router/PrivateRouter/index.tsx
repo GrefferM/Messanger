@@ -4,7 +4,7 @@ import { connect, ConnectedProps } from 'react-redux'
 import L from 'lodash'
 
 import iRootState from '~interface/iRootState'
-import { iAuth } from '~interface/iAuth'
+import { iUser } from '~interface/iAuth'
 import { getAuth } from '~selectors'
 
 const mapState = (state: iRootState) => ({
@@ -28,7 +28,7 @@ type Props = PropsFromRedux & iProps
 
 const PrivateRoute: React.FC<Props> = (props: Props) => {
 
-    const { isAuth } = L.fromPairs(props.auth) as unknown as iAuth
+    const { isAuth } = L.fromPairs(props.auth) as unknown as iUser
 
     function handlerIsAuth(): React.ReactNode {
         if (props.autorization) {

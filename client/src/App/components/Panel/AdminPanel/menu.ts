@@ -16,9 +16,15 @@ const Menu: iMenu[] = [
     },
     {
         isAdmin: true,
-        value: 'Добавить категорию',
+        value: 'Добавить категорию товара',
         icon: faAlignLeft,
-        to: 'addcategory'
+        to: 'addproductcategory'
+    },
+    {
+        isAdmin: true,
+        value: 'Добавить основную категорию',
+        icon: faAlignLeft,
+        to: 'addbasecategory'
     },
     {
         isAdmin: true,

@@ -16,7 +16,7 @@ export default function (passport: PassportStatic) {
     passport.use(
         new Strategy(options, async (payload, done) => {
             try {
-                const user = await User.findById(payload.id).select('name email password')
+                const user = await User.findById(payload.id)
 
                 if (user) {
                     done(null, user)

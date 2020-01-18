@@ -32,7 +32,7 @@ type Props = PropsFromRedux
 
 const Menu: React.FC<Props> = (props: Props) => {
 
-    const { isAuth, isAdmin, name, jwt } = L.fromPairs(props.auth) as unknown as iAuth & iUser
+    const { isAuth, isAdmin, name } = L.fromPairs(props.auth) as unknown as iAuth & iUser
     const [toggler, setToggler] = useState(classes.toggler_icon)
 
     function handlerIsClose() {
@@ -74,30 +74,30 @@ const Menu: React.FC<Props> = (props: Props) => {
                 </ul>
                 <ul className="navbar-nav">
                     {!isAuth && <li className={`nav-item d-flex align-items-center`}>
-                        <Link className={classes.login} to="/login">
+                        <Link className={classes.nav_link} to="/login">
                             Войти
                         </Link>
                     </li>}
                     {!isAuth && <li className={`nav-item d-flex align-items-center`}>
-                        <Link className={classes.login} to="/register">
+                        <Link className={classes.nav_link} to="/register">
                             Зарегестрироваться
                         </Link>
                     </li>}
                     {isAuth && <li className={`nav-item d-flex align-items-center`}>
                         <span className='text-light d-none d-lg-block'>Здраствуйте, {name} </span>
-                        <Link className={classes.login} to="/privateoffice">
+                        <Link className={classes.nav_link} to="/privateoffice">
                             <FontAwesomeIcon icon={faUser} className={'mx-1'} />
                             Личний кабинет
                         </Link>
                     </li>}
                     {isAdmin && <li className={`nav-item d-flex align-items-center`}>
-                        <Link className={classes.login} to="/admin">
+                        <Link className={classes.nav_link} to="/admin">
                             <FontAwesomeIcon icon={faUserShield} className={'mx-1'} />
                             Панель администратора
                         </Link>
                     </li>}
                     {isAuth && <li className={`nav-item`}>
-                        <Link className={classes.logout} to="/logout" onClick={props.actionLogout.bind(event, jwt)}>Выйти</Link>
+                        <Link className={classes.nav_link} to="/logout" onClick={props.actionLogout}>Выйти</Link>
                     </li>}
                 </ul>
             </div>

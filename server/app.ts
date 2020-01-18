@@ -2,7 +2,6 @@ import express from 'express'
 import createError from 'http-errors'
 import logger from 'morgan'
 import mongoose from 'mongoose'
-import bodyParser from 'body-parser'
 import session from 'express-session'
 import passport from 'passport'
 
@@ -12,6 +11,7 @@ import keys from '~config/keys'
 // IMPORT ROUTES
 import indexRouter from '~routes/index'
 import authRouter from '~routes/auth'
+import categoryRouter from '~routes/category'
 
 const app = express()
 const MongoStore = require('connect-mongodb-session')(session)
@@ -40,7 +40,6 @@ app.use(passport.initialize())
 
 
 app.use(express.json())
-app.use(bodyParser.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(session({
     secret: 'some secret value',
@@ -54,6 +53,7 @@ passportMiddleware(passport)
 // ROUTER
 app.use('/api/', indexRouter)
 app.use('/api/auth', authRouter)
+app.use('/api/category', categoryRouter)
 
 // ERROR 404
 app.use(function (req, res, next) {

@@ -25,6 +25,7 @@
             "~models/*": ["models/*"],
             "~middleware/*": ["middleware/*"],
             "~controller/*": ["controllers/*"],
+            "~interface/*": ["interfaces/*"],
             "~config/*": ["config/*"]
         }
     }

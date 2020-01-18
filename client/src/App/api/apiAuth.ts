@@ -7,7 +7,7 @@ import { iFormLoginProps } from '~component/Auth/Login/loginForm'
 import { iFormRegisterProps } from '~component/Auth/Register/registerForm'
 import keys from '~config/keys'
 
-export const fetchLogin = async (value: iFormLoginProps): Promise<iAuth> => {
+export const apiLogin = async (value: iFormLoginProps): Promise<iAuth> => {
     const { body } = await request
         .post(`/api/auth/login`)
         .send(value)
@@ -26,17 +26,16 @@ export const fetchLogin = async (value: iFormLoginProps): Promise<iAuth> => {
         })
     }
 }
-export const fetchLogout = async (jsonwebtoken: string): Promise<iAuth> => {
+export const apiLogout = async (): Promise<iAuth> => {
     const { body } = await request
         .get('/api/auth/logout')
-        .set({ Authorization: jsonwebtoken })
 
     sessionStorage.clear()
     return new Promise(resolve => {
         resolve(body)
     })
 }
-export const fetchRegister = async (value: iFormRegisterProps): Promise<iAuth> => {
+export const apiRegister = async (value: iFormRegisterProps): Promise<iAuth> => {
     const { body } = await request
         .post('/api/auth/register')
         .send(value)

@@ -1,8 +1,6 @@
 export interface iAuth {
-    isAuth: boolean
     success: boolean
     message: string
-    jwt: string
 }
 export interface iUser {
     id: string
@@ -10,4 +8,6 @@ export interface iUser {
     name: string
     email: string
     password: string
+    isAuth: boolean
+    jwt: string
 }

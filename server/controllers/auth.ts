@@ -4,50 +4,19 @@ import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import L from 'lodash'
 
+import { Props } from '~interface/iProps'
+import { Auth, iUser } from '~interface/iUser'
 import keys from '~config/keys'
 
 import '~models/user'
 const User = model('user')
-
-interface iUser {
-    id: string
-    isAdmin: boolean
-    name: string
-    email: string
-    password: string
-}
-interface iAuth {
-    isAuth: boolean
-    success: boolean
-    message: string
-}
-export class Auth implements iAuth, iUser {
-    constructor(
-        public isAuth: boolean,
-        public success: boolean,
-        public message: string) { }
-
-    public id: string = ''
-    public name: string = ''
-    public email: string = ''
-    public password: string = ''
-    public isAdmin: boolean = false
-
-    candidate(params: iUser) {
-        this.id = params.id
-        this.name = params.name
-        this.email = params.email
-        this.password = params.password
-        this.isAdmin = params.isAdmin
-    }
-}
 
 export const login = async (req: Request, res: Response) => {
     try {
         const candidate = await User.findOne({ email: req.body.email }) as unknown as iUser
         const isPasswords = await bcrypt.compare(req.body.password, candidate.password)
         if (isPasswords) {
-            const user = new Auth(true, true, "login user")
+            const user = L.merge(new Auth(), new Props(true, "login user"))
             user.candidate(candidate)
             const token = jwt.sign(
                 L.toPlainObject(
@@ -60,13 +29,13 @@ export const login = async (req: Request, res: Response) => {
             req.session.isAuthenticated = true
             // @ts-ignore
             req.session.user = candidate
-            
+
             res.json(`Bearer ${token}`)
         } else {
-            res.json(new Auth(false, false, "Not a correct password or login entry try again"))
+            res.json(L.merge(new Auth(), new Props(false, "Not a correct password or login entry try again")))
         }
     } catch (err) {
-        res.json(new Auth(false, false, "User not found"))
+        res.json(L.merge(new Auth(), new Props(false, "User not found")))
     }
 }
 export const logout = (req: Request, res: Response) => {
@@ -74,38 +43,37 @@ export const logout = (req: Request, res: Response) => {
         // @ts-ignore
         req.session.destroy(err => {
             if (L.isUndefined(err)) {
-                res.json(new Auth(false, true, "logout user"))
+                res.json(L.merge(new Auth(), new Props(true, "logout user")))
             } else {
-                res.json(new Auth(false, false, `error: ${err}`))
+                res.json(L.merge(new Auth(), new Props(false, `error: ${err}`)))
             }
         })
     } catch (err) {
-        res.json(new Auth(false, false, `error: ${err}`))
+        res.json(L.merge(new Auth(), new Props(false, `error: ${err}`)))
     }
 }
 export const register = async (req: Request, res: Response) => {
     try {
-        const user = await User.findOne({
+        const candidate = await User.findOne({
             email: req.body.email
         })
 
-        if (L.isNull(user)) {
+        if (L.isNull(candidate)) {
             const salt = await bcrypt.genSalt(10)
-            const password = req.body.password
 
             const user = new User({
                 name: req.body.name,
                 email: req.body.email,
-                password: await bcrypt.hash(password, salt),
+                password: await bcrypt.hash(req.body.password, salt),
                 isAdmin: false
             })
             user.save()
 
-            res.json(new Auth(false, true, "registered user"))
+            res.json(L.merge(new Auth(), new Props(true, "registered user")))
         } else {
-            res.json(new Auth(false, false, "user with such email is already registered"))
+            res.json(L.merge(new Auth(), new Props(false, "user with such email is already registered")))
         }
     } catch (err) {
-        res.json(new Auth(false, false, `error: ${err}`))
+        res.json(L.merge(new Auth(), new Props(false, `error: ${err}`)))
     }
 }

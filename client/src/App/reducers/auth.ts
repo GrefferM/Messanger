@@ -9,8 +9,9 @@ import {
     ACTION_LOGIN_SUCCESS,
     ACTION_REGISTER_SUCCESS,
     ACTION_LOGOUT_SUCCESS,
-    LoginAction,
-    RegisterAction
+    iLoginAction,
+    iRegisterAction,
+    iLogoutAction
 } from '~actionType/auth'
 
 const initialSession = () => {
@@ -28,7 +29,7 @@ const initialSession = () => {
 
 const initialState = initialSession()
 
-export default (state = initialState, action: LoginAction & RegisterAction) => {
+export default (state = initialState, action: iLoginAction & iLogoutAction & iRegisterAction) => {
     switch (action.type) {
         case ACTION_LOGIN_SUCCESS:
             return R.merge(state, action.payload)
