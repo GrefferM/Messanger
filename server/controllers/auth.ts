@@ -46,7 +46,6 @@ export const login = async (req: Request, res: Response) => {
     try {
         const candidate = await User.findOne({ email: req.body.email }) as unknown as iUser
         const isPasswords = await bcrypt.compare(req.body.password, candidate.password)
-
         if (isPasswords) {
             const user = new Auth(true, true, "login user")
             user.candidate(candidate)
@@ -62,12 +61,12 @@ export const login = async (req: Request, res: Response) => {
             // @ts-ignore
             req.session.user = candidate
             
-            res.status(200).json(`Bearer ${token}`)
+            res.json(`Bearer ${token}`)
         } else {
-            res.status(401).json(new Auth(false, false, "Not a correct password or login entry try again"))
+            res.json(new Auth(false, false, "Not a correct password or login entry try again"))
         }
     } catch (err) {
-        res.status(404).json(new Auth(false, false, err))
+        res.json(new Auth(false, false, "User not found"))
     }
 }
 export const logout = (req: Request, res: Response) => {
@@ -75,13 +74,13 @@ export const logout = (req: Request, res: Response) => {
         // @ts-ignore
         req.session.destroy(err => {
             if (L.isUndefined(err)) {
-                res.status(200).json(new Auth(false, true, "logout user"))
+                res.json(new Auth(false, true, "logout user"))
             } else {
-                res.status(404).json(new Auth(false, false, err))
+                res.json(new Auth(false, false, `error: ${err}`))
             }
         })
     } catch (err) {
-        res.status(404).json(new Auth(false, false, err))
+        res.json(new Auth(false, false, `error: ${err}`))
     }
 }
 export const register = async (req: Request, res: Response) => {
@@ -102,11 +101,11 @@ export const register = async (req: Request, res: Response) => {
             })
             user.save()
 
-            res.status(200).json(new Auth(false, true, "registered user"))
+            res.json(new Auth(false, true, "registered user"))
         } else {
-            res.status(401).json(new Auth(false, false, "user with such email is already registered"))
+            res.json(new Auth(false, false, "user with such email is already registered"))
         }
     } catch (err) {
-        res.status(404).json(new Auth(false, false, err))
+        res.json(new Auth(false, false, `error: ${err}`))
     }
 }

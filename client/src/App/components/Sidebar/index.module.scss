@@ -1,9 +1,5 @@
-.menu {
-    background-color: #0e1d2b;
-    padding: 0!important;
-}
-
 .nav_item {
+    padding: .3rem 0;
     border-bottom: 1px solid #344453;
 
     &:hover {
@@ -18,6 +14,7 @@
     color: white;
     transition: all .2s ease-in-out;
 
+    display: block;
     position: relative;
 
     &:hover {

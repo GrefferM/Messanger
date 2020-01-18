@@ -10,7 +10,7 @@ import { actionLogout } from '~action/actionsAuth'
 import { getAuth } from '~selectors'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faUserShield } from '@fortawesome/free-solid-svg-icons'
 
 import classes from './index.module.scss'
 
@@ -32,7 +32,7 @@ type Props = PropsFromRedux
 
 const Menu: React.FC<Props> = (props: Props) => {
 
-    const { isAuth, name, jwt } = L.fromPairs(props.auth) as unknown as iAuth & iUser
+    const { isAuth, isAdmin, name, jwt } = L.fromPairs(props.auth) as unknown as iAuth & iUser
     const [toggler, setToggler] = useState(classes.toggler_icon)
 
     function handlerIsClose() {
@@ -85,9 +85,15 @@ const Menu: React.FC<Props> = (props: Props) => {
                     </li>}
                     {isAuth && <li className={`nav-item d-flex align-items-center`}>
                         <span className='text-light d-none d-lg-block'>Здраствуйте, {name} </span>
-                        <Link className={classes.login} to="/privateOffice">
+                        <Link className={classes.login} to="/privateoffice">
                             <FontAwesomeIcon icon={faUser} className={'mx-1'} />
                             Личний кабинет
+                        </Link>
+                    </li>}
+                    {isAdmin && <li className={`nav-item d-flex align-items-center`}>
+                        <Link className={classes.login} to="/admin">
+                            <FontAwesomeIcon icon={faUserShield} className={'mx-1'} />
+                            Панель администратора
                         </Link>
                     </li>}
                     {isAuth && <li className={`nav-item`}>

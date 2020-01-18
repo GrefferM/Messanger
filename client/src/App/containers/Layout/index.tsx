@@ -13,7 +13,6 @@ const Layout: React.FC = (props) => {
             <div className={'h-100'}>
                 {props.children}
             </div>
-            <Menu />
         </Container>
     )
 }

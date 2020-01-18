@@ -4,7 +4,7 @@ import { connect, ConnectedProps } from 'react-redux'
 import L from 'lodash'
 
 import iRootState from '~interface/iRootState'
-import { iAuth, iUser } from '~interface/iAuth'
+import { iUser } from '~interface/iAuth'
 import { getAuth } from '~selectors'
 
 const mapState = (state: iRootState) => ({
@@ -27,10 +27,10 @@ type Props = PropsFromRedux & iProps
 
 const PrivateRoute: React.FC<Props> = (props: Props) => {
 
-    const { isAuth, isAdmin } = L.fromPairs(props.auth) as unknown as iAuth & iUser
+    const { isAdmin } = L.fromPairs(props.auth) as unknown as iUser
 
-    function handlerIsAuth(): React.ReactNode {
-        if (isAuth && isAdmin) {
+    function handlerIsAdmin(): React.ReactNode {
+        if (isAdmin) {
             return props.children
         } else {
             return <Redirect to={props.redirect} />
@@ -40,7 +40,7 @@ const PrivateRoute: React.FC<Props> = (props: Props) => {
 
     return (
         <>
-            { handlerIsAuth() }
+            { handlerIsAdmin() }
         </>
     )
 }

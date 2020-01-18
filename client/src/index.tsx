@@ -8,7 +8,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { createBrowserHistory } from 'history'
 
 import createRootReducer from '~reducers/index'
-import routes from '~routes'
+import routes from '~routes/index'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './index.scss'

@@ -4,19 +4,11 @@ import {
     faUsers,
     faMoneyBillWave,
     faCogs,
-    faInfoCircle,
-    faUserShield
+    faInfoCircle
 } from '@fortawesome/free-solid-svg-icons'
-import { IconDefinition } from '@fortawesome/fontawesome-common-types'
+import iMenu from '~interface/iMenu'
 
-export interface iMenu {
-    isAdmin: boolean
-    to: string
-    value: string
-    icon: IconDefinition
-}
-
-export const Menu: iMenu[] = [
+const Menu: iMenu[] = [
     {
         isAdmin: false,
         value: 'Ваш профиль',
@@ -52,11 +44,7 @@ export const Menu: iMenu[] = [
         value: 'Помощь',
         icon: faInfoCircle,
         to: 'info'
-    },
-    {
-        isAdmin: true,
-        value: 'Панель администратора',
-        icon: faUserShield,
-        to: 'admin'
     }
 ]
+
+export default Menu
