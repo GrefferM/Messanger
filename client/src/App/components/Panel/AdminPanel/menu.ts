@@ -40,12 +40,6 @@ const Menu: iMenu[] = [
     },
     {
         isAdmin: true,
-        value: 'Список категорий',
-        icon: faList,
-        to: 'listcategorys'
-    },
-    {
-        isAdmin: true,
         value: 'Помощь',
         icon: faInfoCircle,
         to: 'info'

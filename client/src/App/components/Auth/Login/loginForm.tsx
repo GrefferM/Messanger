@@ -62,8 +62,9 @@ const loginForm: React.FC<Props> = (props: Props) => {
             <p className={'text-danger mb-1'}>{!success && message}</p>
             <Formik
                 initialValues={initialValues}
-                onSubmit={(values) => {
+                onSubmit={(values, formikBag) => {
                     props.actionLogin(values)
+                    setTimeout(() => formikBag.setSubmitting(false), 2000)
                 }}
                 validationSchema={Schema}
                 render={(formikBag: FormikProps<iFormLoginProps>) => (<Form>
@@ -84,7 +85,7 @@ const loginForm: React.FC<Props> = (props: Props) => {
                         <Link to='/register'>Зарегестрироваться</Link>
                     </div>
 
-                    <button type="submit" className="btn btn-primary w-100" disabled={success && formikBag.isSubmitting}>Войти</button>
+                    <button type="submit" className="btn btn-primary w-100" disabled={formikBag.isSubmitting}>Войти</button>
                 </Form>)}>
             </Formik>
         </div>

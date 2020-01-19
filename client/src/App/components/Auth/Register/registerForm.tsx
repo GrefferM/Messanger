@@ -69,8 +69,9 @@ const registerForm: React.FC<Props> = (props: Props) => {
             <Formik
                 initialValues={initialValues}
 
-                onSubmit={(values) => {
+                onSubmit={(values, formikBag) => {
                     props.actionRegister(values)
+                    setTimeout(() => formikBag.setSubmitting(false), 2000)
                 }}
                 validationSchema={Schema}
                 render={(formikBag: FormikProps<iFormRegisterProps>) => (<Form>
@@ -96,8 +97,8 @@ const registerForm: React.FC<Props> = (props: Props) => {
                         <Link to='/forgotPassword'>Забыл пароль</Link>
                         <Link to='/login'>Войти</Link>
                     </div>
-                    
-                    <button type="submit" className="btn btn-primary w-100" disabled={success && formikBag.isSubmitting}>Зарегестрироваться</button>
+
+                    <button type="submit" className="btn btn-primary w-100" disabled={formikBag.isSubmitting}>Зарегестрироваться</button>
                 </Form>)}>
             </Formik>
         </div>

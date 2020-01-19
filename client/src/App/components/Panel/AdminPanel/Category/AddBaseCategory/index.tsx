@@ -13,16 +13,21 @@ import L from 'lodash'
 import iRootState from '~interface/iRootState'
 import iCategory from '~interface/iCategory'
 import { iUser } from '~interface/iAuth'
-import { 
+import {
     actionAddBaseCategory,
     actionGetBaseCategory
 } from '~action/actionCategory'
-import { getAuth } from '~selectors'
+import {
+    getAuth,
+    getCategory,
+} from '~selectors'
+
+import { Table } from 'react-bootstrap'
 import classes from './index.module.scss'
 
 const Schema = Yup.object().shape({
     name: Yup.string()
-        .min(2, 'Too Short!')
+        .min(3, 'Too Short!')
         .max(50, 'Too Long!')
         .required('The field is offensive to input'),
     icon: Yup.string()
@@ -32,7 +37,8 @@ const Schema = Yup.object().shape({
 })
 
 const mapState = (state: iRootState) => ({
-    auth: getAuth(state)
+    auth: getAuth(state),
+    category: getCategory(state),
 })
 const mapDispatch = {
     actionAddBaseCategory,
@@ -53,10 +59,11 @@ const AddBaseCategory: React.FC<Props> = (props: Props) => {
         icon: ''
     }
     const { jwt } = L.fromPairs(props.auth) as unknown as iUser
+    const category = L.fromPairs(props.category) as unknown as iCategory[]
 
     useEffect(() => {
         props.actionGetBaseCategory(jwt)
-    }, [1])
+    }, [category.length])
 
     return (
         <div>
@@ -64,8 +71,12 @@ const AddBaseCategory: React.FC<Props> = (props: Props) => {
             <hr className='my-2' />
             <Formik
                 initialValues={initialValues}
-                onSubmit={(values) => {
+                onSubmit={(values, formikBag) => {
                     props.actionAddBaseCategory(values, jwt)
+                    setTimeout(() => {
+                        props.actionGetBaseCategory(jwt)
+                        formikBag.setSubmitting(false)
+                    }, 2000);
                 }}
                 validationSchema={Schema}
                 render={(formikBag: FormikProps<iCategory>) => (<Form>
@@ -85,7 +96,35 @@ const AddBaseCategory: React.FC<Props> = (props: Props) => {
                     <button type="submit" className="btn btn-primary" disabled={formikBag.isSubmitting}>Добавить</button>
                 </Form>)}>
             </Formik>
+            <div className='my-4' />
+            <p className={classes.title}>Список основных категорий</p>
+            <hr className='my-2' />
+            {getTableCategory(category)}
         </div>
+    )
+}
+
+function getTableCategory(category: iCategory[]) {
+    return <Table striped bordered hover>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Icon</th>
+            </tr>
+        </thead>
+        <tbody>
+            {L.map(category, (values, index) => getRow(values, ++index))}
+        </tbody>
+    </Table>
+}
+function getRow(category: iCategory, number: number, ): JSX.Element {
+    return (
+        <tr key={number}>
+            <td>{number}</td>
+            <td>{category.name}</td>
+            <td>{category.icon}</td>
+        </tr>
     )
 }
 
