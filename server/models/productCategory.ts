@@ -12,12 +12,6 @@ const productCategorySchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'baseCategory',
         required: true
-    },
-    description: {
-        type: String,
-        maxlength: 255,
-        minlength: 3,
-        required: true
     }
 })
 

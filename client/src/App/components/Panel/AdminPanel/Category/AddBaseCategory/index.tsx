@@ -11,7 +11,7 @@ import * as Yup from 'yup'
 import L from 'lodash'
 
 import iRootState from '~interface/iRootState'
-import iCategory from '~interface/iCategory'
+import { iBaseCategory } from '~interface/iCategory'
 import { iUser } from '~interface/iAuth'
 import {
     actionAddBaseCategory,
@@ -19,7 +19,7 @@ import {
 } from '~action/actionCategory'
 import {
     getAuth,
-    getCategory,
+    getBaseCategory,
 } from '~selectors'
 
 import { Table } from 'react-bootstrap'
@@ -38,7 +38,7 @@ const Schema = Yup.object().shape({
 
 const mapState = (state: iRootState) => ({
     auth: getAuth(state),
-    category: getCategory(state),
+    category: getBaseCategory(state),
 })
 const mapDispatch = {
     actionAddBaseCategory,
@@ -54,12 +54,12 @@ type PropsFromRedux = ConnectedProps<typeof connector>
 type Props = PropsFromRedux
 
 const AddBaseCategory: React.FC<Props> = (props: Props) => {
-    const initialValues: iCategory = {
+    const initialValues: iBaseCategory = {
         name: '',
         icon: ''
     }
     const { jwt } = L.fromPairs(props.auth) as unknown as iUser
-    const category = L.fromPairs(props.category) as unknown as iCategory[]
+    const category = L.fromPairs(props.category) as unknown as iBaseCategory[]
 
     useEffect(() => {
         props.actionGetBaseCategory(jwt)
@@ -79,15 +79,15 @@ const AddBaseCategory: React.FC<Props> = (props: Props) => {
                     }, 2000);
                 }}
                 validationSchema={Schema}
-                render={(formikBag: FormikProps<iCategory>) => (<Form>
+                render={(formikBag: FormikProps<iBaseCategory>) => (<Form>
                     <div className="form-group">
-                        <Field render={({ field, form }: FieldProps<iCategory>) => (<>
+                        <Field render={({ field, form }: FieldProps<iBaseCategory>) => (<>
                             <input name="name" type="text" className={`form-control ${form.errors.name && 'is-invalid'}`} placeholder="Enter name" onChange={field.onChange} />
                             {form.touched.name && form.errors.name && <div className="invalid-feedback">{form.errors.name}</div>}
                         </>)} />
                     </div>
                     <div className="form-group">
-                        <Field render={({ field, form }: FieldProps<iCategory>) => (<>
+                        <Field render={({ field, form }: FieldProps<iBaseCategory>) => (<>
                             <input name="icon" type="text" className={`form-control ${form.errors.icon && 'is-invalid'}`} placeholder="Enter icon" onChange={field.onChange} />
                             {form.touched.icon && form.errors.icon && <div className="invalid-feedback">{form.errors.icon}</div>}
                         </>)} />
@@ -103,8 +103,7 @@ const AddBaseCategory: React.FC<Props> = (props: Props) => {
         </div>
     )
 }
-
-function getTableCategory(category: iCategory[]) {
+function getTableCategory(category: iBaseCategory[]) {
     return <Table striped bordered hover>
         <thead>
             <tr>
@@ -118,7 +117,7 @@ function getTableCategory(category: iCategory[]) {
         </tbody>
     </Table>
 }
-function getRow(category: iCategory, number: number, ): JSX.Element {
+function getRow(category: iBaseCategory, number: number, ): JSX.Element {
     return (
         <tr key={number}>
             <td>{number}</td>
