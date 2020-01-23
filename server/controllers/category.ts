@@ -4,12 +4,12 @@ import L from 'lodash'
 
 import { Props } from '~interface/iProps'
 
-import '~models/baseCategory'
-import '~models/productCategory'
-const BaseCategory = model('baseCategory')
-const ProductCategory = model('productCategory')
+import '~models/CategoryBase'
+import '~models/CategoryProduct'
+const BaseCategory = model('CategoryBase')
+const ProductCategory = model('CategoryProduct')
 
-export const addBaseCategory = async (req: Request, res: Response) => {
+export const addCategoryBase = async (req: Request, res: Response) => {
     try {
         const candidate = await BaseCategory.findOne({
             name: req.body.name
@@ -31,7 +31,7 @@ export const addBaseCategory = async (req: Request, res: Response) => {
         res.json(new Props(false, `error: ${err}`))
     }
 }
-export const getBaseCategory = async (req: Request, res: Response) => {
+export const getCategoryBase = async (req: Request, res: Response) => {
     try {
         const category = await BaseCategory.find()
         res.json(L.merge(category, new Props(true, "return list category")))
@@ -39,7 +39,7 @@ export const getBaseCategory = async (req: Request, res: Response) => {
         res.json(new Props(false, `error: ${err}`))
     }
 }
-export const addProductCategory = async (req: Request, res: Response) => {
+export const addCategoryProduct = async (req: Request, res: Response) => {
     try {
         const candidate = await ProductCategory.findOne({
             name: req.body.name
@@ -47,14 +47,13 @@ export const addProductCategory = async (req: Request, res: Response) => {
 
         if (L.isNull(candidate)) {
             const candidate = await BaseCategory.findOne({
-                name: req.body.name
+                name: req.body.baseCategory
             })
             if (!L.isNull(candidate)) {
                 const { id } = candidate
                 const category = new ProductCategory({
                     name: req.body.name,
-                    icon: req.body.icon,
-                    baseCategory: id
+                    baseCategoryId: id
                 })
 
                 category.save()
@@ -70,7 +69,7 @@ export const addProductCategory = async (req: Request, res: Response) => {
         res.json(new Props(false, `error: ${err}`))
     }
 }
-export const getProductCategory = async (req: Request, res: Response) => {
+export const getCategoryProduct = async (req: Request, res: Response) => {
     try {
         const category = await ProductCategory.find()
         res.json(L.merge(category, new Props(true, "return list category")))

@@ -4,10 +4,12 @@ import AdminRouter from '~component/Router/AdminRouter'
 
 import Layout from '~container/Layout'
 import AdminPanel from '~component/Panel/AdminPanel'
-import AddProduct from '~component/Panel/AdminPanel/Product/AddProduct'
 
-import AddBaseCategory from '~component/Panel/AdminPanel/Category/AddBaseCategory'
-import AddProductCategory from '~component/Panel/AdminPanel/Category/AddProductCategory'
+import AddProduct from '~component/Panel/AdminPanel/AddProduct'
+import AddProductMain from '~component/Panel/AdminPanel/AddProduct/MainSpecifications'
+import AddProductFeatures from '~component/Panel/AdminPanel/AddProduct/Features'
+import AddBaseCategory from '~component/Panel/AdminPanel/AddCategoryBase'
+import AddProductCategory from '~component/Panel/AdminPanel/AddCategoryProduct'
 
 const RouterAdmin = (
     <Switch>
@@ -18,11 +20,24 @@ const RouterAdmin = (
                 </AdminRouter>
             </Layout>
         </Route>
-        <Route path='/admin/addproduct'>
+        <Route path='/admin/addproduct' exact>
             <Layout>
                 <AdminRouter redirect='/login'>
                     <AdminPanel>
-                        <AddProduct />
+                        <AddProduct>
+                            <AddProductMain />
+                        </AddProduct>
+                    </AdminPanel>
+                </AdminRouter>
+            </Layout>
+        </Route>
+        <Route path='/admin/addproduct/features'>
+            <Layout>
+                <AdminRouter redirect='/login'>
+                    <AdminPanel>
+                        <AddProduct>
+                            <AddProductFeatures />
+                        </AddProduct>
                     </AdminPanel>
                 </AdminRouter>
             </Layout>

@@ -3,8 +3,10 @@ import jwt from 'jsonwebtoken'
 import L from 'lodash'
 
 import { iAuth } from '~interface/iAuth'
-import { iFormLoginProps } from '~component/Auth/Login/loginForm'
-import { iFormRegisterProps } from '~component/Auth/Register/registerForm'
+import { 
+    iFormLoginProps,
+    iFormRegisterProps
+} from '~interface/iForm'
 import keys from '~config/keys'
 
 export const apiLogin = async (value: iFormLoginProps): Promise<iAuth> => {

@@ -72,6 +72,7 @@
     "@types/yup": "^0.26.27",
     "bootstrap": "^4.4.1",
     "connected-react-router": "^6.6.1",
+    "filereader": "^0.10.3",
     "formik": "^2.0.8",
     "history": "^4.10.1",
     "jquery": "^3.4.1",

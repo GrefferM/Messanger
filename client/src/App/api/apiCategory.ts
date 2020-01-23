@@ -1,11 +1,11 @@
 import request from 'superagent'
 
 import {
-    iBaseCategory,
-    iProductCategory
+    iCategoryBase,
+    iCategoryProduct
 } from '~interface/iCategory'
 
-export const apiAddBaseCategory = async (value: iBaseCategory, jsonwebtoken: string): Promise<iBaseCategory> => {
+export const apiAddCategoryBase = async (value: iCategoryBase, jsonwebtoken: string): Promise<iCategoryBase> => {
     const { body } = await request
         .post(`/api/category/base/add`)
         .set({ Authorization: jsonwebtoken })
@@ -16,7 +16,7 @@ export const apiAddBaseCategory = async (value: iBaseCategory, jsonwebtoken: str
     })
 }
 
-export const apiGetBaseCategory = async (jsonwebtoken: string): Promise<iBaseCategory> => {
+export const apiGetCategoryBase = async (jsonwebtoken: string): Promise<iCategoryBase> => {
     const { body } = await request
         .get(`/api/category/base/get`)
         .set({ Authorization: jsonwebtoken })
@@ -26,7 +26,7 @@ export const apiGetBaseCategory = async (jsonwebtoken: string): Promise<iBaseCat
     })
 }
 
-export const apiAddProductCategory = async (value: iBaseCategory, jsonwebtoken: string): Promise<iProductCategory> => {
+export const apiAddCategoryProduct = async (value: iCategoryProduct, jsonwebtoken: string): Promise<iCategoryProduct> => {
     const { body } = await request
         .post(`/api/category/product/add`)
         .set({ Authorization: jsonwebtoken })
@@ -37,7 +37,7 @@ export const apiAddProductCategory = async (value: iBaseCategory, jsonwebtoken: 
     })
 }
 
-export const apiGetProductCategory = async (jsonwebtoken: string): Promise<iBaseCategory> => {
+export const apiGetCategoryProduct = async (jsonwebtoken: string): Promise<iCategoryProduct> => {
     const { body } = await request
         .get(`/api/category/product/get`)
         .set({ Authorization: jsonwebtoken })

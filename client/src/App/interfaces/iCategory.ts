@@ -1,10 +1,9 @@
-export interface iBaseCategory {
+export interface iCategoryBase {
     name: string
     icon: string
 }
 
-export interface iProductCategory {
+export interface iCategoryProduct {
     name: string
-    baseCategory: number
-    icon: string
+    baseCategory: string
 }

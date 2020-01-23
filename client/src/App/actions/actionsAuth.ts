@@ -18,8 +18,10 @@ import {
     apiRegister as apiRegisterApi,
     apiLogout as apiLogoutApi
 } from '~api/apiAuth'
-import { iFormLoginProps } from '~component/Auth/Login/loginForm'
-import { iFormRegisterProps } from '~component/Auth/Register/registerForm'
+import { 
+    iFormLoginProps, 
+    iFormRegisterProps 
+} from '~interface/iForm'
 
 export const actionLogin = (value: iFormLoginProps) => async (dispatch: Dispatch) => {
     dispatch({ type: ACTION_LOGIN_START })

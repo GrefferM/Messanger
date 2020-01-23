@@ -1,13 +1,16 @@
 import { Schema, model } from 'mongoose'
 
-const baseCategorySchema = new Schema({
+const TemplateFeatureSchema = new Schema({
     name: {
         type: String,
         maxlength: 255,
         minlength: 3,
         required: true
     },
-    icon: String
+    options: {
+        key: String,
+        value: String
+    }
 })
 
-model('baseCategory', baseCategorySchema)
+model('TemplateFeature', TemplateFeatureSchema)

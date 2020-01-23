@@ -1,18 +1,17 @@
 import { Schema, model } from 'mongoose'
 
-const productCategorySchema = new Schema({
+const CategoryProductSchema = new Schema({
     name: {
         type: String,
         maxlength: 255,
         minlength: 3,
         required: true
     },
-    icon: String,
-    baseCategory: {
+    baseCategoryId: {
         type: Schema.Types.ObjectId,
         ref: 'baseCategory',
         required: true
     }
 })
 
-model('productCategory', productCategorySchema)
+model('CategoryProduct', CategoryProductSchema)

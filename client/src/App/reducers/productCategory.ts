@@ -1,15 +1,15 @@
 import * as R from 'ramda'
 
 import {
-    ACTION_GET_PRODUCT_CATEGORY_SUCCESS,
-    iGetProductCategoryAction
+    ACTION_GET_CATEGORY_PRODUCT_SUCCESS,
+    iGetCategoryProductAction
 } from '~actionType/category'
 
 const initialState = {}
 
-export default (state = initialState, action: iGetProductCategoryAction) => {
+export default (state = initialState, action: iGetCategoryProductAction) => {
     switch (action.type) {
-        case ACTION_GET_PRODUCT_CATEGORY_SUCCESS:
+        case ACTION_GET_CATEGORY_PRODUCT_SUCCESS:
             return R.merge(state, action.payload)
         default:
             return state

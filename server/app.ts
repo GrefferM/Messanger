@@ -12,6 +12,7 @@ import keys from '~config/keys'
 import indexRouter from '~routes/index'
 import authRouter from '~routes/auth'
 import categoryRouter from '~routes/category'
+import productRouter from '~routes/product'
 
 const app = express()
 const MongoStore = require('connect-mongodb-session')(session)
@@ -54,6 +55,7 @@ passportMiddleware(passport)
 app.use('/api/', indexRouter)
 app.use('/api/auth', authRouter)
 app.use('/api/category', categoryRouter)
+app.use('/api/product', productRouter)
 
 // ERROR 404
 app.use(function (req, res, next) {

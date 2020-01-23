@@ -26,6 +26,7 @@
             "~reducers/*": ["App/reducers/*"],
             "~actionType/*": ["App/actionTypes/*"],
             "~action/*": ["App/actions/*"],
+            "~public/*": ["App/public/*"],
             "~api/*": ["App/api/*"],
             "~interface/*": ["App/interfaces/*"],
             "~routes/*": ["App/routes/*"],

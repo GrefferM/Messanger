@@ -8,8 +8,7 @@ import { Props } from '~interface/iProps'
 import { Auth, iUser } from '~interface/iUser'
 import keys from '~config/keys'
 
-import '~models/user'
-const User = model('user')
+const User = model('User')
 
 export const login = async (req: Request, res: Response) => {
     try {

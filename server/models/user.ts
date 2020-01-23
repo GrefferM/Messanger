@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose'
 
-const userSchema = new Schema({
+const UserSchema = new Schema({
     name: {
         type: String,
         maxlength: 255,
@@ -25,4 +25,4 @@ const userSchema = new Schema({
     }
 })
 
-model('user', userSchema)
+model('User', UserSchema)
